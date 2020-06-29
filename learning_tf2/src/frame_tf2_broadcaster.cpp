@@ -7,14 +7,12 @@ int main(int argc, char** argv){
   ros::init(argc, argv, "my_tf2_broadcaster");
   ros::NodeHandle nh;
 
-  rf2_ros::TransformBroadcaster tfb;
+  tf2_ros::TransformBroadcaster tfb;
   geometry_msgs::TransformStamped transformStamped;
 
   transformStamped.header.frame_id = "turtle1";
   transformStamped.child_frame_id = "carrot1";
-  transformStamped.transform.translation.x = 0.0;
-  transformStamped.transform.translation.y = 2.0;
-  transformStamped.transform.translation.z = 0.0
+  transformStamped.transform.translation.z = 0.0;
   
   tf2::Quaternion q;
   q.setRPY(0, 0, 0);
@@ -26,8 +24,13 @@ int main(int argc, char** argv){
   ros::Rate rate(10.0);
   while(nh.ok()){
     transformStamped.header.stamp = ros::Time::now();
+    transformStamped.transform.translation.x = 2.0*sin(ros::Time::now().toSec());
+    transformStamped.transform.translation.y = 2.0*cos(ros::Time::now().toSec());
+    
     tfb.sendTransform(transformStamped);
     rate.sleep();
-    print("sending\n");
+    printf("sending\n");
   }
+
+  return 0;
 }

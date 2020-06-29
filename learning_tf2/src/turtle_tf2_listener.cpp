@@ -29,11 +29,13 @@ int main(int argc, char **argv){
   while(nh.ok()){
     geometry_msgs::TransformStamped transformStamped;
     try{
-      transformStamped = tfBuffer.lookupTransform("turtle2", "turtle1", ros::Time(0));
+      ros::Time now = ros::Time::now();
+      ros::Time past = now - ros::Duration(5.0);
+      transformStamped = tfBuffer.lookupTransform("turtle2", now, 
+                                                  "turtle1", past, 
+                                                  "world", ros::Duration(1.0));
     } catch(tf2::TransformException &ex){
-      ROS_WARN("%s", ex.what());
-      ros::Duration(1.0).sleep();
-      continue;
+      ROS_WARN("Could NOT transform turtle2 to turtle1: %s", ex.what());
     }
 
     geometry_msgs::Twist vel_msg;
