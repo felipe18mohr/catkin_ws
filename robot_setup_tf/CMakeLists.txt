@@ -8,8 +8,10 @@ project(robot_setup_tf)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
   roscpp
+  geometry_msgs
+  sensor_msgs
+  nav_msgs
   tf
 )
 
@@ -104,8 +106,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES robot_setup_tf
-#  CATKIN_DEPENDS geometry_msgs roscpp tf
+  LIBRARIES robot_setup_tf
+  CATKIN_DEPENDS geometry_msgs nav_msgs sensor_msgs roscpp tf
 #  DEPENDS system_lib
 )
 
@@ -210,4 +212,5 @@ add_executable(laser_scan src/laser_scan.cpp)
 add_executable(odometry src/odometry.cpp)
 target_link_libraries(tf_broadcaster ${catkin_LIBRARIES})
 target_link_libraries(tf_listener ${catkin_LIBRARIES})
+target_link_libraries(laser_scan ${catkin_LIBRARIES})
 target_link_libraries(odometry ${catkin_LIBRARIES})
