@@ -67,7 +67,7 @@ find_package(Boost REQUIRED COMPONENTS system)
 ## Generate actions in the 'action' folder
 add_action_files(
   DIRECTORY action
-  FILES Fibonacci.action
+  FILES Fibonacci.action Averaging.action
 )
 
 ## Generate added messages and services with any dependencies listed here
@@ -216,3 +216,9 @@ add_dependencies(fibonacci_server ${actionlib_tutorials_EXPORTED_TARGETS})
 add_executable(fibonacci_client src/fibonacci_client.cpp)
 target_link_libraries(fibonacci_client ${catkin_LIBRARIES})
 add_dependencies(fibonacci_client ${actionlib_tutorials_EXPORTED_TARGETS})
+
+add_executable(averaging_server src/averaging_server.cpp)
+target_link_libraries(averaging_server ${catkin_LIBRARIES})
+
+add_executable(averaging_client src/averaging_client.cpp)
+target_link_libraries(averaging_client ${catkin_LIBRARIES})
