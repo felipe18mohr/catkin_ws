@@ -222,3 +222,9 @@ target_link_libraries(averaging_server ${catkin_LIBRARIES})
 
 add_executable(averaging_client src/averaging_client.cpp)
 target_link_libraries(averaging_client ${catkin_LIBRARIES})
+
+add_executable(fibonacci_callback_client src/fibonacci_callback_client.cpp)
+target_link_libraries(fibonacci_callback_client ${catkin_LIBRARIES})
+
+add_executable(fibonacci_class_client src/fibonacci_class_client.cpp)
+target_link_libraries(fibonacci_class_client ${catkin_LIBRARIES})
